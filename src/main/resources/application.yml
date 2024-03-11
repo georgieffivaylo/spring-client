@@ -1,0 +1,29 @@
+server:
+  port: 8443
+
+spring:
+  redis:
+    host: 127.0.0.1
+    port: 6379
+  main:
+    allow-bean-definition-overriding: true
+  security:
+    oauth2:
+      client:
+        registration:
+          spring:
+            provider: spring
+            client-id: client
+            client-secret: secret
+            authorization-grant-type: authorization_code
+            client-authentication-method: client_secret_basic
+            redirect-uri: '{baseUrl}/login/oauth2/code/{registrationId}'
+            scope: user.read,openid
+        provider:
+          spring:
+            issuer-uri: http://localhost:8088
+
+logging:
+  level:
+    root: trace
+
